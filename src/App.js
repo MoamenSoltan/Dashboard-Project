@@ -9,6 +9,7 @@ import {TooltipComponent} from '@syncfusion/ej2-react-popups'
 import {Navbar,Footer,Sidebar,ThemeSettings} from './components'
 import {ECommerce,Orders,Calendar,Employees,Stacked,Pyramid,Customers,Kanban,Area,Bar,Pie,Financial,ColorPicker,ColorMapping,Editor,Line} from './pages'
 
+import { useStateContext } from './contexts/ContextProvider';
 
 import './App.css';
 
@@ -19,8 +20,17 @@ import './App.css';
 // 4-handle file/Folder structure first
 // 5- routing imports in each component
 // 6- links in dummy
+//7- routes in app.js
+// 8-routes explanation below
+//9- patterns used in context api
+//10-explanation for method invoking at the end of Sidebar page
+//11-
+
+
 function App() {
-  const activeMenu=true
+  // const activeMenu=true
+  const {activeMenu}=useStateContext()//destructure from context
+
   return (
     <div className="App ">
         <BrowserRouter>
@@ -59,6 +69,7 @@ function App() {
                     {/* note : '/' means home , element property takes a component, we made the the first 1 twice to make it the main as well */}
                     {/* dashboard */}
                       <Route path='/' element={<ECommerce/>}/>
+                      <Route path='/ecommerce' element={<ECommerce/>}/>
 
                     {/* pages */}
 
@@ -96,3 +107,22 @@ function App() {
 }
 
 export default App;
+/**
+ * The key distinction between the `Routes` in `App.js` and the `NavLink` in the `Sidebar` lies in their purposes within React Router:
+
+1. **Routes in `App.js`:**
+   - The `Routes` component defines **where** each component should be rendered based on the current URL. Each `Route` inside `Routes` specifies the path (URL) and the component that should be shown when the user navigates to that path.
+   - In short, it tells React what content to display when a specific URL is visited.
+   - For example, the route `path='/orders' element={<Orders/>}` means that when a user visits the `/orders` URL, the `Orders` component will be displayed in the main view.
+
+2. **NavLink in `Sidebar`:**
+   - The `NavLink` is used to **navigate** between the different routes. It’s a clickable link that changes the URL and, as a result, triggers the corresponding `Route` to display the correct component.
+   - In the `Sidebar`, each `NavLink` is associated with a route (like `/orders`) and allows the user to click on it to change the URL. When the URL changes, React Router will look at the `Routes` defined in `App.js` and render the matching component.
+   - For example, clicking on the `NavLink` for `/orders` will change the URL to `/orders`, which will trigger the route in `App.js` that displays the `Orders` component.
+
+### In summary:
+- **Routes in `App.js`**: Define the logic for what should be displayed when a specific path is visited.
+- **NavLink in `Sidebar`**: Provides the navigation functionality, allowing users to change the URL and, as a result, render the associated route defined in `App.js`.
+
+They work together: `NavLink` changes the URL, and the `Routes` define what should be rendered for that URL.
+ */
