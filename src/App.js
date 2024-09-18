@@ -28,6 +28,8 @@ import './App.css';
 // 12- nested components concept in navbar is crucial
 //13-search for dummy data for any project
 //14- uniform styling (bg-main-bg for nav , and bg-white for sideBar)
+// 15- implementing a custom component that implements  premade components promotes reusability and consistency - read end of ECommerce file or sparkline
+// 16- also Button component that returns a button
 function App() {
   // const activeMenu=true
   const {activeMenu}=useStateContext()//destructure from context
