@@ -22,6 +22,7 @@ const NavButton = ({title,customFunc,icon,color,dotColor})=>(
 
       <span style={{background:dotColor}} className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"/>
        {/* span is the little dot on chat and notifications */}
+       {/* use inline style because props cant be added to tw styling */}
         {icon}
       
     </button>

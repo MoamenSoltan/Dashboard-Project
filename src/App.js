@@ -24,9 +24,10 @@ import './App.css';
 // 8-routes explanation below
 //9- patterns used in context api
 //10-explanation for method invoking at the end of Sidebar page
-//11-
-
-
+//11-instant return for a component inside another (navButton on navBar)
+// 12- nested components concept in navbar is crucial
+//13-search for dummy data for any project
+//14- uniform styling (bg-main-bg for nav , and bg-white for sideBar)
 function App() {
   // const activeMenu=true
   const {activeMenu}=useStateContext()//destructure from context
@@ -62,7 +63,7 @@ function App() {
                 <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
                   <Navbar/>
                 </div>
-              </div>
+              
 
               <div>
                   <Routes>
@@ -98,6 +99,7 @@ function App() {
 
 
                   </Routes>
+                </div>
                 </div>
             </div>
 

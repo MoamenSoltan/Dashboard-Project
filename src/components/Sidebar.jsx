@@ -97,3 +97,42 @@ Here:
 - **Without parameters:** You can directly pass the function reference, like `onClick={handleCloseSideBar}`.
 - **With parameters:** You must wrap the function call in a callback, like `onClick={() => handleClick('cart')}`, to prevent it from executing during the render process.
  */
+/**
+ * The difference between `<button onClick={handleCloseSideBar}>Close Sidebar</button>` and `<button onClick={handleCloseSideBar()}>Close Sidebar</button>` lies in **when and how the function is invoked**:
+
+### 1. **`onClick={handleCloseSideBar}`**
+This is the correct approach when you want the function to be executed **only when the button is clicked**.
+
+- **Explanation**: 
+   - `handleCloseSideBar` is being **passed as a reference** to the `onClick` event handler. 
+   - React knows to call `handleCloseSideBar` **when the user clicks** the button.
+   - It doesn’t get invoked immediately upon rendering.
+
+```js
+<button onClick={handleCloseSideBar}>Close Sidebar</button>
+```
+
+- **Behavior**: 
+   - The function will only be called when the `onClick` event happens (i.e., when the user clicks the button).
+
+### 2. **`onClick={handleCloseSideBar()}`**
+This is **incorrect** unless you specifically want the function to be executed **immediately when the component renders**.
+
+- **Explanation**: 
+   - `handleCloseSideBar()` with parentheses **immediately invokes** the function as soon as the component renders.
+   - The result of `handleCloseSideBar()` (whatever the function returns) will be assigned to the `onClick` handler, which is likely not what you want.
+
+```js
+<button onClick={handleCloseSideBar()}>Close Sidebar</button>
+```
+
+- **Behavior**: 
+   - The `handleCloseSideBar` function is called **as soon as the component renders**, even without a button click.
+   - After the initial render, the button's `onClick` may either be `undefined` or the return value of `handleCloseSideBar()`, which is typically not useful for an event handler.
+
+### Summary:
+
+- **`onClick={handleCloseSideBar}`**: Correct. The function is passed as a reference and will be executed only on a click event. 
+()=>handleCloseSideBar() is correct as well
+- **`onClick={handleCloseSideBar()}`**: Incorrect for this case, because it invokes the function immediately during render, which is usually not the desired behavior for `onClick`. 
+ */
