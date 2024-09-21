@@ -30,6 +30,13 @@ import './App.css';
 //14- uniform styling (bg-main-bg for nav , and bg-white for sideBar)
 // 15- implementing a custom component that implements  premade components promotes reusability and consistency - read end of ECommerce file or sparkline
 // 16- also Button component that returns a button
+// 17- any data that would be too big for the current file , do like point 15 - 16 and also take notes from dummy.js , where all data needed for different component is located there , for cleaner code 
+// 18- any thing that would be repeatedly used , make a component of it , like the header component , very simple but used multiple times
+// 19- use spread operator for iterables (obj,arr) even as props , if the array holds props of a div for a component , you can iterate on each element using spread operator , it will transform each key value pair into a property of the component (read orders.jsx)
+// 20- paging is the load more concept (see orders.jsx) // called pagination
+// 21- all the array of objects stuff is to be fetched from an API 
+//22-the cutomers page doesnt include the CRUD functinalities , we need to apply them , 
+//23-learn CRUD , axios , async await ,login stuff
 function App() {
   // const activeMenu=true
   const {activeMenu}=useStateContext()//destructure from context

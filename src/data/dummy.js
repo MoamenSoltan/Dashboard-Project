@@ -887,7 +887,7 @@ export const ordersGrid = [
   { field: 'CustomerName',
     headerText: 'Customer Name',
     width: '150',
-    textAlign: 'Center',
+    textAlign: 'left',
   },
   {
     field: 'TotalAmount',
