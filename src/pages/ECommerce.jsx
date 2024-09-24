@@ -8,6 +8,7 @@ import {earningData,SparkLineAreaData,eComPieChartData, SparklineAreaData} from 
 import { useStateContext } from '../contexts/ContextProvider'
 
 const ECommerce = () => {
+  const {currentColor} = useStateContext()
   return (
     <div className='mt-12 '>
       <div className='flex flex-wrap lg:flex-nowrap justify-center'>
@@ -34,13 +35,13 @@ const ECommerce = () => {
         <div className='flex mt-4 gap-1 flex-wrap justify-center items-center' >
           {
             earningData.map((item)=>(
-              <div key={item.title} className='p-4 mr-3 bg-white rounded-2xl md:w-56 pt-9'>
+              <div key={item.title} className='p-4 mr-3 bg-white dark:bg-secondary-dark-bg rounded-2xl md:w-56 pt-9'>
                 <button type='button' style={{color:item.iconColor,backgroundColor:item.iconBg}} className={`rounded-full p-4 text-2xl hover:drop-shadow-xl`}>
                   {item.icon}
                 </button>
                 <p className='mt-3'>
-                  <span className='font-semibold'>{item.amount}</span>
-                  <span className={`text-${item.pcColor} ml-2`}>{item.percentage}</span>
+                  <span className='font-semibold dark:text-gray-200'>{item.amount}</span>
+                  <span className={`text-gray-200 text-${item.pcColor} ml-2`}>{item.percentage}</span>
                 </p>
                 <p className='text-gray-400 text-sm'>{item.title}</p>
               </div>
@@ -85,7 +86,7 @@ const ECommerce = () => {
               {/* sparkLine component //visit syncfusion documentation for parameters*/}
               {/* here instead of defining the sparkLineComponent right away , we make the code more modular , by making our own component and passing data as props , implement the sparkLineComponent itself in the new component we made */}
               <div className='mt-5'>
-                <SparkLine currentColor="gray" id="sparkline" type="Line" height="80px" width="250px" data={SparklineAreaData} color="gray" />
+                <SparkLine id="sparkline"  type="Line" height="80px" width="250px" data={SparklineAreaData} color={currentColor} />
               </div>
               <div className='mt-10'>
                 <Button color='white' bgColor="gray" text="Download Report" borderRadius="10px"/>

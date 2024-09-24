@@ -41,19 +41,46 @@ import './App.css';
 //25-event handling and the event object technical names , more explanation in color picker page
 //26- styling using js on colorPicker page
 //27- notes on custom events and event driven programming below
+// 28- routes and popups
+// 29-setter functions , better practice , (in theming and overall , revise context provider)
+// 30- all states and their setters and any setter function that accesses the setState function(these functions are useful when i want to apply multiple logic along with setState , e.g. saving to local storage) , are in our context provider 
+// 31- onChange={(e)=>{}} because its an event 
+// 32-setColor in context provider and its notes
+// 33- revise all functions passing through contextProvider
+//34- we use () to when we call useStateContext to invoke useContext(StateContext)
+// 35- syntax for Navlink isActive destructuring 
+/**
+ * style={({isActive})=>({backgroundColor:
+                      isActive?currentColor:''})}
+
+  we instantly return an object of styling , the destructuring itself happens in a call back function , hence don't forget to instantly return .
+ */
+// 36- saving values using local storage??
+//37- bg object in tw config 
+/**
+ * 
+ *    backgroundColor: {
+          'main-bg': '#FAFBFB',
+          'main-dark-bg': '#20232A',
+          'secondary-dark-bg': '#33373E',
+          'light-gray': '#F7F7F7',
+          'half-transparent': 'rgba(0, 0, 0, 0.5)',
+        }
+ */
 function App() {
   // const activeMenu=true
   const {activeMenu}=useStateContext()//destructure from context
-
+  const {themes,setThemes,currentColor,currentMode}=useStateContext()
   return (
-    <div className="App ">
+    <div className={currentMode==="Dark"?'dark':'light'}>
+      {/* for dark mode */}
         <BrowserRouter>
             <div className='flex relative dark:bg-main-dark-bg'>
               <div className='fixed right-4 bottom-4 ' style={{zIndex:'1000'}}>
                 <TooltipComponent content="Settings" position="Center">
-                  <button type="button" className='text-3xl p-4 hover:drop-shadow-xl
+                  <button onClick={()=>{setThemes(true)}} type="button" className='text-3xl p-4 hover:drop-shadow-xl
                    hover:bg-light-gray text-white '
-                   style={{background:'gray',borderRadius:'50%'}}>
+                   style={{background:currentColor,borderRadius:'50%'}}>
                     {/**background here is in inline style becuase when we apply theming , we are going to change it dynamically */}
                     <FiSettings/>
                   </button>
@@ -71,7 +98,7 @@ function App() {
                   </div>
                 )
               }{/**conditional rendering to show the side bar according to a value (a state) */}
-              <div className={`dark:bg-main-bg bg-main-bg  min-h-screen w-full ${activeMenu ? 'md:ml-72':'flex-2'}`}>
+              <div className={`dark:bg-main-dark-bg bg-main-bg  min-h-screen w-full ${activeMenu ? 'md:ml-72':'flex-2'}`}>
                 {/**to avoid redundant code use template literal  */}
                 <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
                   <Navbar/>
@@ -79,7 +106,11 @@ function App() {
               
 
               <div>
-                  <Routes>
+
+                  <ThemeSettings/> 
+                  {/* or themeSettings $$<ThemeSettings/> where the 1st is a state*/}
+                  {/* above all routes */}
+                  <Routes >
                     {/* note : '/' means home , element property takes a component, we made the the first 1 twice to make it the main as well */}
                     {/* dashboard */}
                       <Route path='/' element={<ECommerce/>}/>

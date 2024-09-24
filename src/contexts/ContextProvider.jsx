@@ -25,6 +25,38 @@ export const ContextProvider = ({children})=>{//ContextProvider not contextProvi
     const [screenSize,setScreenSize]=useState(undefined)
     //because we dont know the width at first
 
+    const [themes,setThemes]=useState(false)
+
+    const [currentColor, setCurrentColor] = useState('#03c9d7')
+
+    const [currentMode, setCurrentMode] = useState('Light')
+
+
+    // setter functions , better practice
+    //we made the setter here , for cleaner code and also we need to save the value to local storage , if we want to do the same in ThemeSettings.jsx it wouldnt look clean
+    const setMode=(mode)=>{
+        // setCurrentMode(e.target.value)
+        // no need for e.target.value because we are passing a string
+        setCurrentMode(mode)
+
+        // to save the value even on refresh , we save it on localStorage
+        // localStorage.setItem('themeMode',e.target.value)
+        localStorage.setItem('themeMode',mode)
+        setThemes(false)
+
+    }
+
+    const setColor=(color)=>{
+        setCurrentColor(color)
+        // very important , color here is the first parameter (of only 1 parameters) passed to setColor in ThemeSettings , as buttons (in themesettings) don't have onCHange , we cant use e.target.value here , we can access the first parameter by using any name as a parameter for this function , this is reqular programming , dont make it complex 
+
+        // to save the value even on refresh , we save it on localStorage
+        localStorage.setItem('colorMode',color)
+
+        // also i want to close the theme options menu upon selecting a color
+        setThemes(false)
+    }
+
 
     const handleClick=(clicked)=>{
         // setActiveMenu((prev)=>({...prev,[clicked]:true}))
@@ -42,8 +74,15 @@ Without the brackets, JavaScript would treat clicked as a literal string, and yo
             setisClicked,
             handleClick,
             screenSize,
-            setScreenSize
-
+            setScreenSize,
+            setThemes,
+            themes,
+            currentColor,
+            setCurrentColor,
+            currentMode,
+            setCurrentMode,
+            setMode,
+            setColor
 
 
         }}>
@@ -52,7 +91,8 @@ Without the brackets, JavaScript would treat clicked as a literal string, and yo
     )
 }
 
-export const useStateContext=()=>useContext(StateContext)//? why is it a function ? essentially a custom hook to pass value globally , because one of the rules of hooks (in this case useContext) is that it must be called in a function component , which in this case there are none , thats why we call it in a function
+export const useStateContext=()=>useContext(StateContext)
+//? why is it a function ? essentially a custom hook to pass value globally , because one of the rules of hooks (in this case useContext) is that it must be called in a function component , which in this case there are none , thats why we call it in a function
 
 //we need the useStateContext if we wish to consume a value from provider , any place in our app
 //the value in a provider can be either a state or setState
